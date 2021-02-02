@@ -36,7 +36,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
 
       final generatedItems = _generateItems();
 
-      await Future<void>.delayed(Duration(seconds: 3));
+      await Future<void>.delayed(Duration(seconds: 1));
 
       yield ItemsStateLoaded(generatedItems);
     }

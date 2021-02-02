@@ -42,36 +42,40 @@ class _ItemDetailsScreenState extends State<_ItemDetailsScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return BlocBuilder<ItemsBloc, ItemsState>(
-      builder: (context, state) {
-        final item = state.items[widget.id];
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Details'),
+      ),
+      body: BlocBuilder<ItemsBloc, ItemsState>(
+        builder: (context, state) {
+          if (state is ItemsStateLoaded) {
+            final item = state.items[widget.id];
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Details'),
-          ),
-          body: Column(
-            children: [
-              ListTile(
-                title: Text(
-                  item.name,
-                  style: theme.textTheme.headline6.copyWith(
-                    color: Colors.black87,
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    item.name,
+                    style: theme.textTheme.headline6.copyWith(
+                      color: Colors.black87,
+                    ),
                   ),
-                ),
-                subtitle: Text('Description...'),
-                trailing: Text(
-                  '\$ ${item.price.toStringAsFixed(2)}',
-                  style: theme.textTheme.subtitle1.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.green,
+                  subtitle: Text('Description...'),
+                  trailing: Text(
+                    '\$ ${item.price.toStringAsFixed(2)}',
+                    style: theme.textTheme.subtitle1.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.green,
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-        );
-      },
+                )
+              ],
+            );
+          }
+
+          return Container();
+        },
+      ),
     );
   }
 }

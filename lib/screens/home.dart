@@ -41,6 +41,7 @@ class _HomeState extends State<_Home> {
     final theme = Theme.of(context);
 
     return BlocBuilder<ItemsBloc, ItemsState>(
+      buildWhen: (previous, current) => current is ItemsStateLoaded,
       builder: (context, state) {
         if (state is ItemsStateLoaded) {
           final items = state.items;
